@@ -1,0 +1,49 @@
+/* JobLanding.css */
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background: linear-gradient(to right, #9333ea, #ec4899);
+    padding: 24px;
+    text-align: center;
+  }
+  
+  .content {
+    max-width: 768px;
+    color: white;
+  }
+  
+  .heading {
+    font-size: 3rem;
+    font-weight: bold;
+  }
+  
+  .heading span {
+    color: #d8b4fe; /* Light Purple */
+  }
+  
+  .description {
+    margin-top: 16px;
+    font-size: 1.125rem;
+    color: #e5e7eb;
+  }
+  
+  .get-started-btn {
+    margin-top: 24px;
+    background-color: #3b82f6;
+    color: white;
+    font-weight: bold;
+    padding: 12px 24px;
+    border-radius: 9999px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+  }
+  
+  .get-started-btn:hover {
+    background-color: #1e40af;
+  }
+  
