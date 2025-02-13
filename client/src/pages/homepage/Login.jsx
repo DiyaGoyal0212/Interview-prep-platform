@@ -1,10 +1,10 @@
 import React, { useContext, useState } from 'react'
-import loginIcons from "../assest/signin.gif";
+import loginIcons from "../../assets/signin.gif";
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { Link, useNavigate } from 'react-router-dom';
-import SummaryApi from '../commonapi/index';
+import SummaryApi from '../../commonapi/index';
 import {toast} from 'react-toastify';
-import Context from '../context';
+import Context from '../../context';
 
 const Login = () => {
   const [showPassword, setPassword] = useState(false);

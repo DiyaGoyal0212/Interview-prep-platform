@@ -24,23 +24,13 @@
 
 
 import React from "react";
-import "./Home.css"; // Importing CSS file
-import Button from "../../components/Button"; // Ensure correct path to Button component
+// import "./Home.css"; // Importing CSS file
+// import Button from "../../components/Button"; // Ensure correct path to Button component
 
 const Home = () => {
   return (
     <>
-    <div className="container">
-      <div className="content">
-        <h1 className="title">
-          <span className="text-purple">Job</span> <span className="text-white">interview</span>
-        </h1>
-        <p className="subtitle">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-        </p>
-        <Button className="get-started-btn">Get Started!</Button>
-      </div>
-    </div>
+    <h2>home</h2>
     </>
   );
 };
