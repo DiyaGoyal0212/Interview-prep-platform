@@ -3,6 +3,7 @@ const cors = require('cors');
 const cookieParser = require('cookie-parser');
 require('dotenv').config();
 const connectDB = require('./config/db');
+const questionRoutes = require('./routes/questionRoutes');
 const router = require('./routes');
 
 const app = express();
@@ -14,6 +15,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 app.use("/api",router);
+app.use('/api/questions', questionRoutes);
 
 const PORT = 8080 || process.env.PORT;
 
