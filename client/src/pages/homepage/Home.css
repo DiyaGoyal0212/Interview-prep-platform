@@ -1,49 +1,71 @@
-/* JobLanding.css */
+/* General Styles */
+body {
+  font-family: 'Arial', sans-serif;
+}
 
-.container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    background: linear-gradient(to right, #9333ea, #ec4899);
-    padding: 24px;
-    text-align: center;
-  }
-  
-  .content {
-    max-width: 768px;
-    color: white;
-  }
-  
-  .heading {
-    font-size: 3rem;
-    font-weight: bold;
-  }
-  
-  .heading span {
-    color: #d8b4fe; /* Light Purple */
-  }
-  
-  .description {
-    margin-top: 16px;
-    font-size: 1.125rem;
-    color: #e5e7eb;
-  }
-  
-  .get-started-btn {
-    margin-top: 24px;
-    background-color: #3b82f6;
-    color: white;
-    font-weight: bold;
-    padding: 12px 24px;
-    border-radius: 9999px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.3s ease-in-out;
-  }
-  
-  .get-started-btn:hover {
-    background-color: #1e40af;
-  }
-  
+button, a {
+  transition: all 0.3s ease-in-out;
+}
+
+/* Hero Section */
+.hero {
+  background: linear-gradient(to right, #00bfae, #009688);
+  padding: 40px 20px;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Features Section */
+.feature-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.feature-item i {
+  font-size: 3rem;
+  margin-bottom: 15px;
+  color: #009688;
+}
+
+.feature-item h3 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.feature-item p {
+  font-size: 1rem;
+  color: #666;
+}
+
+.get-started-btn:hover, .get-started-btn:focus {
+  background-color: #00796b;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Call to Action Section */
+.call-to-action {
+  background: linear-gradient(to right, #00bfae, #00796b);
+  padding: 50px 20px;
+  text-align: center;
+}
+
+.call-to-action a {
+  background-color: #fff;
+  padding: 15px 30px;
+  border-radius: 10px;
+  color: #00796b;
+  font-weight: bold;
+}
+
+/* Contact Section */
+.contact-section {
+  background-color: #004d40;
+  padding: 40px 20px;
+  text-align: center;
+}

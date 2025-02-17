@@ -4,30 +4,26 @@ import axios from 'axios';
 const ReactQuestionsPage = () => {
   const [questions, setQuestions] = useState([]);
   const [loading, setLoading] = useState(false);  // To manage loading state
-  const [role, setRole] = useState('React');  // Set a default role
+  const [role, setRole] = useState('React');  // Default role
 
+  // Function to fetch predefined questions
   const fetchQuestions = async () => {
     try {
-      // Make the API call to get questions
-      const result = await axios.get(`http://localhost:8080/api/questions/React`);
-      console.log('API response:', result.data);  // Logging the response data
-  
-      // Check if 'result.data.questions' exists and is an array
-      if (result.data && Array.isArray(result.data.questions)) {
-        setQuestions(result.data.questions);  // Set questions if available
-      } else {
-        console.error('No questions field in response:', result.data);
-        setQuestions([]);  // Set an empty array if questions are not available
-      }
+      // Make the API call to get questions for a predefined role (e.g., React)
+      const result = await axios.get(`http://localhost:8080/api/questions/${role}`);
+      console.log('Predefined questions:', result.data);
+      setQuestions(result.data.questions);
     } catch (error) {
-      console.error('Error fetching/generating questions:', error);
-      setQuestions([]);  // Set an empty array in case of error
+      console.error('Error fetching questions:', error);
+      setQuestions([]);
     }
   };
 
+  // Function to generate dynamic questions using QuizAPI
   const generateQuestions = async () => {
     setLoading(true);  // Start loading
     try {
+      // Send a POST request to the backend with the role to generate new questions
       const response = await axios.post('http://localhost:8080/api/questions/generate', { role });
       console.log('Generated Questions:', response.data.questions);
       setQuestions(response.data.questions);
@@ -35,24 +31,37 @@ const ReactQuestionsPage = () => {
       console.error('Error generating questions:', error);
       if (error.response) {
         console.error('Backend response error:', error.response.data);
+        alert(`Error: ${error.response.data.error || 'Failed to generate questions'}`);
       } else {
         console.error('Error details:', error.message);
+        alert('Error: Failed to connect to the server');
       }
-      setQuestions([]);  // Set an empty array in case of error
     } finally {
       setLoading(false);  // End loading
     }
   };
-  
 
   useEffect(() => {
-    fetchQuestions();  // Call the function when the component mounts
-  }, []);  // Empty dependency array to call once
+    fetchQuestions();  // Fetch predefined questions for the default role when component mounts
+  }, [role]);  // Fetch questions when role changes
 
   return (
     <div className="mt-24 px-6 py-4 bg-gray-50">
-      <h1 className="text-3xl font-bold text-gray-800 mb-6">React Interview Questions</h1>
-      
+      <h1 className="text-3xl font-bold text-gray-800 mb-6">Interview Questions for {role}</h1>
+
+      {/* Role Input */}
+      <div className="mb-6">
+        <label htmlFor="role" className="block text-sm font-medium text-gray-700">Select Role:</label>
+        <input
+          type="text"
+          id="role"
+          value={role}
+          onChange={(e) => setRole(e.target.value)}  // Set role based on user input
+          className="mt-1 p-2 border border-gray-300 rounded-lg"
+          placeholder="Enter role (e.g., React)"
+        />
+      </div>
+
       {/* Display the list of questions */}
       <ul className="space-y-4">
         {questions.map((question, index) => (

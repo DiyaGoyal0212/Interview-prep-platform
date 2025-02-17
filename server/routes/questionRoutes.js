@@ -1,22 +1,16 @@
 const express = require('express');
-const Question = require('../models/Question');
 const axios = require('axios');
 const router = express.Router();
 
-// Fetch predefined questions
-// Express.js backend example
-
-
-
+// Fetch predefined questions (previous code stays unchanged)
 router.get('/:role', (req, res) => {
   const role = req.params.role;
   console.log('Role:', role);  // Check if the role is passed correctly
 
-  // Example of predefined questions for React
   const questions = {
-    React: ['What is JSX?', 'Explain React lifecycle methods.', 'What is the virtual DOM?','What is the difference between state and props?'],
+    React: ['What is JSX?', 'Explain React lifecycle methods.', 'What is the virtual DOM?', 'What is the difference between state and props?'],
     Java: ['What is Java?', 'Explain object-oriented programming in Java.', 'What is the difference between JDK, JRE, and JVM?'],
-    Cpp: ['What is a pointer?', 'Explain inheritance in C++.','What is the difference between C and C++?', 'What is the difference between C++ and Java?'],
+    Cpp: ['What is a pointer?', 'Explain inheritance in C++.', 'What is the difference between C and C++?', 'What is the difference between C++ and Java?'],
   };
 
   if (questions[role]) {
@@ -26,11 +20,7 @@ router.get('/:role', (req, res) => {
   }
 });
 
-
-  
-
-// Generate dynamic questions using OpenAI API
-// Define the route handler as async
+// Fetch dynamic questions from Open Trivia Database (OpenTDB)
 router.post('/generate', async (req, res) => {
   const { role } = req.body;
 
@@ -38,38 +28,28 @@ router.post('/generate', async (req, res) => {
     return res.status(400).json({ error: 'Role is required' });
   }
 
-  const prompt = `Generate unique interview questions for the role of ${role}`;
-
+  // Request questions from the OpenTDB API
   try {
-    console.log(`Generating questions for role: ${role}`);
-    console.log('Request Body:', req.body);
-    
-    // Make the request to OpenAI
-    const response = await axios.post(
-      'https://api.openai.com/v1/completions',
-      {
-        model: 'text-davinci-003',
-        prompt: prompt,
-        max_tokens: 150,
+    console.log(`Fetching trivia questions for role: ${role}`);
+
+    const response = await axios.get('https://opentdb.com/api.php', {
+      params: {
+        amount: 5,          // Limiting to 5 questions as per your request
+        category: 18,       // General Knowledge category
+        difficulty: 'easy', // Easy difficulty
+        type: 'multiple',  // Multiple choice type
       },
-      {
-        headers: {
-          Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
-        },
-      }
-    );
+    });
 
-    console.log('OpenAI API response:', response.data);
+    // Extract questions from the OpenTDB response
+    const questions = response.data.results.map((item) => item.question);
 
-    const questions = response.data.choices[0].text.split('\n').map(q => q.trim()).filter(q => q);
-    res.json({ questions });
+    res.json({ questions: questions });
 
   } catch (error) {
-    console.error('Error generating questions:', error.response?.data || error.message);
-    res.status(500).json({ error: 'Failed to generate questions' });
+    console.error('Error fetching questions:', error.response?.data || error.message);
+    res.status(500).json({ error: 'Failed to fetch questions' });
   }
 });
-
-
 
 module.exports = router;
