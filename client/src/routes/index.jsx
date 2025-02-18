@@ -4,9 +4,12 @@ import Home from '../pages/homepage/Home';
 import Login from '../pages/homepage/Login';
 import Signup from '../pages/homepage/Signup';
 import Resume from '../pages/Resume';
+import Pricing from '../pages/Pricing';
 import CppQuestions from '../pages/CppQuestions';
 import JavaQuestions from '../pages/JavaQuestions';
 import ReactQuestions from '../pages/ReactQuestions';
+import InterviewOptions from '../pages/InterviewOptions';
+import TextInterview from '../pages/TextInterview';
 
 
 const router = createBrowserRouter([
@@ -31,6 +34,10 @@ const router = createBrowserRouter([
                 element: <Resume/>
             },
             {
+                path: "/pricing",
+                element: <Pricing/>
+            },
+            {
                 path: "/cpp",
                 element: <CppQuestions/>
             },
@@ -41,7 +48,15 @@ const router = createBrowserRouter([
             {
                 path: "/react",
                 element: <ReactQuestions/>
-            }
+            },
+            {
+                path: "/InterviewOptions",
+                element: <InterviewOptions/>
+            },
+            {
+                path: "/text-interview",
+                element: <TextInterview/>
+            },
         ]
     }
 ])

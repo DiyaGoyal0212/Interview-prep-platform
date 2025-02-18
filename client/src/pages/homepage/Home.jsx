@@ -1,81 +1,117 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import interview from "../../assets/main.jpeg"; // Make sure this image exists
+import interview from "../../assets/intervi.gif"; // Make sure this path is correct
+import Slider from "react-slick";
+// import Footer from "../../components/Footer";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+
+// Import images directly (RECOMMENDED):
+import uni1 from "../../assets/uni1.jpg"; // Correct paths and extensions
+import uni2 from "../../assets/uni2.jpg";
+import uni3 from "../../assets/uni3.png";
+import uni4 from "../../assets/uni4.png";
+import uni5 from "../../assets/uni5.png";
+import uni6 from "../../assets/uni6.png";
+import uni7 from "../../assets/uni7.png";
+import WhyChooseUs from "./WhyChooseUs";
+// ... import other images as needed
 
 const Home = () => {
+  const universityLogos = [uni1, uni2, uni3, uni4, uni5, uni6, uni7]; // Use imported images
+
+  const slickSettings = {
+    dots: true,
+    infinite: true,
+    speed: 300,
+    slidesToShow: 4,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 2000,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 4,
+        },
+      },
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 3,
+        },
+      },
+      {
+        breakpoint: 640,
+        settings: {
+          slidesToShow: 2,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+        },
+      },
+    ],
+  };
+
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-r from-teal-600 to-teal-400 text-white">
-
-      {/* Hero Section */}
-      <div className="flex flex-col md:flex-row items-center justify-center flex-grow p-10 bg-opacity-90">
-        <div className="w-full md:w-1/2 flex justify-center ">
-          <img src={interview} alt="Online Exam" className="w-3/4 rounded-b-md mt-20" />
-        </div>
-        <div className="w-full md:w-1/2 text-center md:text-left">
-          <h1 className="text-5xl font-bold text-white leading-tight">
-            Welcome to <span className="text-teal-200">Prepify</span>
+    <>
+    <div className="min-h-screen bg-gradient-to-r from-[#e6f2ff] to-[#f0f5ff] text-gray-800 font-poppins flex flex-col items-center pt-16">
+      <div className="flex flex-col md:flex-row items-center justify-center w-full px-10 bg-opacity-80 animate-fadeIn">
+        <div className="w-full md:w-1/2 text-center md:text-left pr-10">
+          <h1 className="text-5xl font-bold leading-tight mb-4 animate-fadeIn">
+            Unlock Your Career Potential with <span className="text-[#66b3ff]">GetHired</span>
           </h1>
-          <p className="mt-4 text-gray-100">
-            Ace Your Next Interview with Confidence – Learn, Practice, Succeed!
+          <p className="mt-4 text-lg animate-fadeIn">
+            Master the art of interviewing. Gain the confidence and skills you need to land your dream job. Practice, learn, and succeed with InterviewAce.
           </p>
-          <button className="mt-6 bg-white text-teal-600 px-6 py-3 rounded-lg text-lg font-semibold hover:bg-gray-100">
-            Get started now!
-          </button>
-        </div>
-      </div>
-
-      {/* About Section */}
-      <section className="bg-teal-800 text-white py-20 px-6">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl font-bold mb-4">About Prepify</h2>
-          <p className="text-lg text-gray-200 mb-8">
-            Prepify is your go-to platform for preparing for interviews. Whether you're a beginner or an experienced professional, we offer tools, resources, and mock interviews to help you excel.
-          </p>
-          <Link to="/about" className="text-teal-200 text-lg font-semibold hover:underline">
-            Learn more about us
+          <Link to="/signup">
+            <button className="mt-6 bg-[#66b3ff] text-white px-6 py-3 rounded-lg text-lg font-semibold hover:bg-[#5299e6] transition-all animate-fadeIn font-poppins">
+              Try For Free
+            </button>
           </Link>
-        </div>
-      </section>
 
-      {/* Features Section */}
-      <section className="bg-white py-20 px-6">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl font-bold text-teal-600 mb-12">Why Choose Prepify?</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12">
-            <div className="flex flex-col items-center">
-              <i className="fas fa-laptop-code text-4xl text-teal-600 mb-4"></i>
-              <h3 className="text-2xl font-semibold text-teal-600 mb-2">Interactive Mock Interviews</h3>
-              <p className="text-gray-600">Practice interviews in a real-time simulated environment and get instant feedback.</p>
-            </div>
-            <div className="flex flex-col items-center">
-              <i className="fas fa-graduation-cap text-4xl text-teal-600 mb-4"></i>
-              <h3 className="text-2xl font-semibold text-teal-600 mb-2">Expert Resources</h3>
-              <p className="text-gray-600">Access to expert-written guides, tips, and study materials to help you prepare effectively.</p>
-            </div>
-            <div className="flex flex-col items-center">
-              <i className="fas fa-clipboard-check text-4xl text-teal-600 mb-4"></i>
-              <h3 className="text-2xl font-semibold text-teal-600 mb-2">Track Your Progress</h3>
-              <p className="text-gray-600">Keep track of your interview preparation journey and improve over time.</p>
-            </div>
+          <div className="mt-12 animate-fadeIn">
+            <h2 className="text-1.5xl font-bold mb-6">
+              Trusted by Students & Professionals from
+            </h2>
+            <Slider {...slickSettings}>
+              {universityLogos.map((logo, index) => (
+                <div key={index} className="px-4">
+                  <img
+                    src={logo} // Use the imported image directly
+                    alt={`University Logo ${index + 1}`}
+                    className="h-20 w-auto mx-auto"
+                    onError={(e) => {
+                      console.error(`Error loading image:`, logo, e); // Log the actual image variable
+                      e.target.onerror = null;
+                      e.target.src = "../../assets/placeholder.png"; // Use a placeholder (relative to Home.jsx)
+                    }}
+                  />
+                </div>
+              ))}
+            </Slider>
           </div>
         </div>
-      </section>
-
-
-      {/* Contact Section */}
-      <section className="bg-teal-900 py-20 px-6">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl font-bold text-white mb-4">Contact Us</h2>
-          <p className="text-lg text-gray-300 mb-8">
-            Have questions or need assistance? Our team is here to help. Get in touch with us!
-          </p>
-          <Link to="/contact" className="text-teal-200 text-lg font-semibold hover:underline">
-            Contact Support
-          </Link>
+        <div className="w-full md:w-1/2 flex justify-center pl-10">
+          <img
+            src={interview}
+            alt="Interview Preparation"
+            className="w-3/4 rounded-md mt-20 md:mt-0 animate-fadeIn"
+            onError={(e) => {
+              console.error(`Error loading interview image:`, interview, e);
+              e.target.onerror = null;
+              e.target.src = "../../assets/placeholder.png"; // Placeholder path
+            }}
+          />
         </div>
-      </section>
-
+      </div>
     </div>
+    <WhyChooseUs/>
+    {/* <Footer/> */}
+    </>
   );
 };
 
